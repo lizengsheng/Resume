@@ -105,8 +105,8 @@ def build_pdf(output_path: Path, portrait_path: Path) -> None:
     register_fonts()
 
     pdf = canvas.Canvas(str(output_path), pagesize=A4, pageCompression=1)
-    pdf.setTitle("李增圣 - 大模型算法公开简历")
-    pdf.setAuthor("李增圣")
+    pdf.setTitle("Li Zengsheng - 大模型算法公开简历")
+    pdf.setAuthor("Li Zengsheng")
     pdf.setSubject("大模型后训练、Agent、Agentic RL 求职简历")
     pdf.setKeywords("大模型后训练, Agent, Agentic RL, SFT, DPO, PPO, GRPO")
 
@@ -118,7 +118,7 @@ def build_pdf(output_path: Path, portrait_path: Path) -> None:
     pdf.roundRect(margin, PAGE_HEIGHT - 130, content_width, 98, 18, stroke=0, fill=1)
     pdf.setFillColor(NAVY)
     pdf.setFont("MSYH-Bold", 25)
-    pdf.drawString(margin + 20, PAGE_HEIGHT - 66, "李增圣")
+    pdf.drawString(margin + 20, PAGE_HEIGHT - 66, "Li Zengsheng")
     pdf.setFillColor(BLUE)
     pdf.setFont("MSYH-Bold", 10.5)
     pdf.drawString(margin + 20, PAGE_HEIGHT - 87, "大模型后训练 · Agent · Agentic RL")
@@ -228,7 +228,7 @@ def build_pdf(output_path: Path, portrait_path: Path) -> None:
     pdf.setFillColor(MUTED)
     pdf.setFont("MSYH", 6.8)
     pdf.drawString(margin, 16, "公开求职简历 · 不含手机号 · 完整项目方法见 lizengsheng.github.io/Resume/")
-    pdf.drawRightString(PAGE_WIDTH - margin, 16, "李增圣")
+    pdf.drawRightString(PAGE_WIDTH - margin, 16, "Li Zengsheng")
 
     pdf.showPage()
     pdf.save()

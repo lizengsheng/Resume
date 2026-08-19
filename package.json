@@ -2,11 +2,11 @@
   "name": "lizengsheng-resume",
   "type": "module",
   "version": "1.0.0",
-  "description": "李增圣的大模型后训练、Agent 与 Agentic RL 中文求职作品集。",
+  "description": "Li Zengsheng 的大模型后训练、Agent 与 Agentic RL 中文求职作品集。",
   "license": "MIT",
   "private": true,
   "author": {
-    "name": "李增圣",
+    "name": "Li Zengsheng",
     "url": "https://github.com/lizengsheng"
   },
   "homepage": "https://lizengsheng.github.io/Resume/",
@@ -18,6 +18,8 @@
     "dev": "astro dev",
     "start": "astro dev",
     "check": "astro check",
+    "check:links": "node scripts/check_site_links.mjs",
+    "check:links:strict": "node scripts/check_site_links.mjs --strict-external",
     "build": "astro check && astro build",
     "preview": "astro preview"
   },

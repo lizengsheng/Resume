@@ -378,6 +378,15 @@ button { font: inherit; }
 
 .project-card { min-width: 0; }
 
+.empty-state {
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  padding: 2rem;
+  color: var(--muted);
+  text-align: center;
+}
+
 .project-cover-link {
   display: grid;
   overflow: hidden;

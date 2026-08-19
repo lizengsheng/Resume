@@ -15,8 +15,12 @@ const projects = sortProjects((await getCollection("projects", ({ data }) => !da
       <h1>全部项目</h1>
       <p>页面自动读取项目 Markdown/MDX；新增文件后会自动出现在这里。</p>
     </div>
-    <div class="project-grid">
-      {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
-    </div>
+    {projects.length > 0 ? (
+      <div class="project-grid">
+        {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+      </div>
+    ) : (
+      <p class="empty-state">暂时还没有公开项目。</p>
+    )}
   </div>
 </Layout>

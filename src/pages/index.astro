@@ -6,9 +6,16 @@ import Layout from "@/layouts/Layout.astro";
 import { withBase } from "@/lib/paths";
 import { sortProjects } from "@/lib/projects";
 
-const projects = sortProjects(
-  (await getCollection("projects", ({ data }) => !data.draft && data.featured)).slice(),
-).slice(0, siteConfig.home.maxFeaturedProjects);
+const allProjects = sortProjects(
+  (await getCollection("projects", ({ data }) => !data.draft)).slice(),
+);
+const projects = allProjects
+  .filter((project) => project.data.featured)
+  .slice(0, siteConfig.home.maxFeaturedProjects);
+const profileFacts = siteConfig.profile.facts.map((fact) => ({
+  value: "source" in fact && fact.source === "projectCount" ? String(allProjects.length) : fact.value,
+  label: fact.label,
+}));
 ---
 
 <Layout>
@@ -35,7 +42,7 @@ const projects = sortProjects(
       </div>
 
       <dl class="profile-facts">
-        {siteConfig.profile.facts.map((fact) => (
+        {profileFacts.map((fact) => (
           <div>
             <dt>{fact.value}</dt>
             <dd>{fact.label}</dd>
@@ -74,9 +81,13 @@ const projects = sortProjects(
           <h2>{siteConfig.home.projectsTitle}</h2>
           <p>{siteConfig.home.projectsDescription}</p>
         </div>
-        <div class="project-grid">
-          {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
-        </div>
+        {projects.length > 0 ? (
+          <div class="project-grid">
+            {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+          </div>
+        ) : (
+          <p class="empty-state">暂时还没有公开的精选项目。</p>
+        )}
         <a class="all-projects-link" href={withBase("/projects/")}>{siteConfig.home.allProjectsLabel}</a>
       </div>
 

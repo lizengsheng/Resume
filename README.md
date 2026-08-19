@@ -1,8 +1,10 @@
-# 李增圣 · 中文求职作品集
+# Li Zengsheng's Resume
 
 基于 `simple-portfolio` 视觉骨架改造的中文求职作品集。首页采用资料卡、三项事实、快捷操作和“作品 / 关于”标签页；项目内容由 Markdown/MDX 自动生成，并提供隐私安全的公开简历 PDF。
 
 在线地址：<https://lizengsheng.github.io/Resume/>。首页顶部导航、首屏和联系区均提供[技术博客](https://lizengsheng.github.io/Blog/)入口。
+
+日常更新项目、页面内容、链接、头像或简历 PDF，请直接参考 [`UPDATE_GUIDE.md`](UPDATE_GUIDE.md)。该文档同时包含本地检查、Git 提交、远程推送和 GitHub Pages 验证步骤。
 
 ## 页面
 

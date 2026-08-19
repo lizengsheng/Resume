@@ -7,19 +7,19 @@
 export const siteConfig = {
   site: {
     brand: "Portfolio",
-    title: "李增圣的个人作品集",
-    description: "李增圣的大模型算法、Agent 与强化学习个人作品集。",
+    title: "Li Zengsheng 的个人作品集",
+    description: "Li Zengsheng 的大模型算法、Agent 与强化学习个人作品集。",
     socialImage: "/social-card.svg",
   },
   profile: {
-    name: "李增圣",
+    name: "Li Zengsheng",
     headline: "大模型算法 · Agent · 强化学习",
     intro: "聚焦大模型后训练、检索增强与多 Agent 系统，持续记录项目实践与技术思考。",
     avatar: "/profile.jpg",
-    avatarAlt: "李增圣个人照片",
+    avatarAlt: "Li Zengsheng 个人照片",
     facts: [
       { value: "2027", label: "硕士毕业" },
-      { value: "2+", label: "代表项目" },
+      { value: "", label: "公开项目", source: "projectCount" },
       { value: "Agent", label: "关注方向" },
     ],
   },
