@@ -33,3 +33,10 @@
 - 项目集合改为通用模型：仅标题和摘要必填，slug 可由文件名生成，时间、封面、指标、排序、精选、草稿和外链均可选；新增全部项目页。
 - README 增加个人信息、头像和 Markdown 项目的三步替换指南与最小项目示例。
 - 验证：`astro check` 通过；生产构建生成 5 个页面；桌面和 390px 手机页面无横向溢出或脚本错误，标签页点击和状态切换正常，全部项目页返回 200。
+
+## 2026-08-19 - 批次六完成
+
+- 创建公开仓库 `https://github.com/lizengsheng/Resume`，本地 `main` 已跟踪 `origin/main`。
+- GitHub Pages 发布源设置为 GitHub Actions，线上地址为 `https://lizengsheng.github.io/Resume/`，HTTPS 已启用。
+- 首次 Pages 工作流 `32259511135` 的 build 与 deploy 均成功。
+- 线上验证：首页、全部项目页、项目详情、头像和公开 PDF 均返回 200；HTML 包含 `/Resume` 资源路径、博客链接和项目链接；浏览器中首页正常渲染，标签页交互正常且无控制台错误。
