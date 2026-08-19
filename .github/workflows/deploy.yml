@@ -26,6 +26,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
   deploy:
     needs: build
     runs-on: ubuntu-latest

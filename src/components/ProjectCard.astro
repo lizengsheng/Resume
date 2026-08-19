@@ -27,9 +27,11 @@ const slug = getProjectSlug(project);
       {period && <time>{period}</time>}
     </div>
     <h3><a href={withBase(`/projects/${slug}/`)}>{title}</a></h3>
-    <div class="tag-list" aria-label="项目技术标签">
-      {tags.map((tag) => <span>{tag}</span>)}
-    </div>
+    {tags.length > 0 && (
+      <div class="tag-list" aria-label="项目技术标签">
+        {tags.map((tag) => <span>{tag}</span>)}
+      </div>
+    )}
     <p>{summary}</p>
     {metrics.length > 0 && (
       <p class="project-result"><strong>{metrics[0].value}</strong> {metrics[0].label}</p>

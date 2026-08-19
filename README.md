@@ -16,10 +16,10 @@
 
 ## 本地开发
 
-要求 Node.js 20 或 22。
+要求 Node.js 22.19.0 或更高版本。Astro 7 及其网络依赖不再支持旧版 Node；建议安装 Node 22 的最新维护版本。
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -28,6 +28,7 @@ npm run dev
 ```bash
 npm run check
 npm run build
+npm run audit
 npm run preview
 ```
 
@@ -62,7 +63,7 @@ featured: true
 
 可选字段包括 `slug`、`period`、`cover`、`coverAlt`、`metrics`、`featured`、`draft`、`order` 和 `externalUrl`。`cover` 建议指向 `public/` 中的图片，例如 `/project-covers/example.webp`；`draft: true` 的项目不会构建，`featured: false` 的项目只出现在“全部项目”页。
 
-项目 Schema 位于 `src/content.config.ts`，全局样式位于 `src/styles/global.css`。修改简历事实时，应同时更新网站配置和 PDF 生成器，并确认仓库中没有手机号或微信。
+项目 Schema 位于 `src/content.config.ts`，全局样式位于 `src/styles/global.css`。站点只保留实际使用的 Astro、MDX 与 Sitemap 依赖，不依赖 React 或 Tailwind。修改简历事实时，应同时更新网站配置和 PDF 生成器，并确认仓库中没有手机号或微信。
 
 重新生成公开简历：
 

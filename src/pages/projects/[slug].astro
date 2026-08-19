@@ -26,9 +26,11 @@ const { title, summary, period, tags, metrics, cover, coverAlt, externalUrl } = 
         {period && <p class="eyebrow">{period}</p>}
         <h1>{title}</h1>
         <p class="project-summary">{summary}</p>
-        <div class="tag-list">
-          {tags.map((tag) => <span>{tag}</span>)}
-        </div>
+        {tags.length > 0 && (
+          <div class="tag-list" aria-label="项目技术标签">
+            {tags.map((tag) => <span>{tag}</span>)}
+          </div>
+        )}
         {externalUrl && (
           <a class="external-project-link" href={externalUrl} target="_blank" rel="noreferrer">访问项目 ↗</a>
         )}

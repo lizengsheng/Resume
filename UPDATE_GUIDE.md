@@ -9,10 +9,10 @@
 ```powershell
 cd C:\Users\19108\Desktop\lizengsheng\Resume
 git pull --ff-only
-npm install
+npm ci
 ```
 
-`npm install` 仅在第一次使用、切换电脑或依赖发生变化时需要执行。
+要求 Node.js 22.19.0 或更高版本，可先运行 `node --version` 查看。`npm ci` 仅在第一次使用、切换电脑或依赖发生变化时需要执行；它会严格按照 `package-lock.json` 安装已验证版本。
 
 ## 二、只用 Markdown 更新项目
 
@@ -110,6 +110,12 @@ npm run check
 npm run build
 ```
 
+如果修改了 `package.json` 或 `package-lock.json`，再运行依赖安全审计：
+
+```powershell
+npm run audit
+```
+
 需要在浏览器检查本地成品时，先在一个终端运行：
 
 ```powershell
@@ -135,7 +141,7 @@ git commit -m "content: update portfolio"
 git push origin main
 ```
 
-推送 `main` 会自动触发 `.github/workflows/deploy.yml`。工作流会重新安装依赖、构建 Astro、部署 GitHub Pages，并检查线上站内链接。
+推送 `main` 会自动触发 `.github/workflows/deploy.yml`。工作流会重新安装依赖、构建 Astro、阻止带有高危依赖的版本发布、部署 GitHub Pages，并检查线上站内链接。
 
 等待并查看最新一次部署：
 
@@ -180,6 +186,7 @@ npm run check:links:strict -- https://lizengsheng.github.io/Resume/
 
 - [ ] `npm run check` 通过
 - [ ] `npm run build` 通过
+- [ ] 修改依赖时 `npm run audit` 为 0 个漏洞
 - [ ] 新项目或修改内容在本地可见
 - [ ] PDF 和头像文件可打开
 - [ ] 不含不希望公开的隐私信息
