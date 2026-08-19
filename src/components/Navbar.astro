@@ -1,0 +1,37 @@
+---
+import ThemeToggle from "@/components/ThemeToggle.astro";
+import { siteConfig } from "@/config";
+import { withBase } from "@/lib/paths";
+
+const home = withBase("/");
+const projects = withBase("/projects/");
+const links = [
+  { label: "首页", href: home },
+  { label: "项目", href: projects },
+];
+---
+
+<header class="site-header">
+  <nav class="nav-shell" aria-label="主导航">
+    <a class="wordmark" href={home} aria-label={`${siteConfig.profile.name}作品集首页`}>
+      <span class="brand-mark" aria-hidden="true"><i></i></span>
+      <span class="wordmark-copy">{siteConfig.site.brand}</span>
+    </a>
+
+    <div class="nav-links">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      <a href={siteConfig.links.blog} target="_blank" rel="noreferrer">博客</a>
+    </div>
+
+    <div class="nav-actions">
+      <ThemeToggle />
+      <details class="mobile-menu">
+        <summary aria-label="打开导航菜单"><span></span><span></span><span></span></summary>
+        <div>
+          {links.map((link) => <a href={link.href}>{link.label}</a>)}
+          <a href={siteConfig.links.blog} target="_blank" rel="noreferrer">博客 ↗</a>
+        </div>
+      </details>
+    </div>
+  </nav>
+</header>

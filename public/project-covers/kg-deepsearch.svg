@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">KG-Deepsearch 多 Agent 图谱检索流程</title>
+  <desc id="desc">知识图谱、CoE 检索和多 Agent 报告生成的抽象关系图</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="1" y2="0">
+      <stop offset="0" stop-color="#111c2d"/>
+      <stop offset="1" stop-color="#214f7d"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="960" height="600" rx="42" fill="url(#bg)"/>
+  <text x="70" y="88" fill="#93c7f8" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3">GRAPH + MULTI-AGENT</text>
+  <text x="70" y="145" fill="#fff" font-family="Arial, sans-serif" font-size="45" font-weight="800">KG-Deepsearch</text>
+  <g stroke="#78b8f2" stroke-opacity=".6" stroke-width="2">
+    <path d="M156 294 310 226 430 316 578 232 760 298"/>
+    <path d="M156 294 286 406 430 316 558 418 760 298"/>
+    <path d="M310 226 286 406M578 232 558 418"/>
+  </g>
+  <g fill="#f1bd4a" filter="url(#glow)">
+    <circle cx="156" cy="294" r="13"/>
+    <circle cx="310" cy="226" r="11"/>
+    <circle cx="286" cy="406" r="11"/>
+    <circle cx="430" cy="316" r="16"/>
+    <circle cx="578" cy="232" r="11"/>
+    <circle cx="558" cy="418" r="11"/>
+    <circle cx="760" cy="298" r="14"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="16" font-weight="700">
+    <g transform="translate(68 264)"><rect width="134" height="60" rx="16" fill="#fff"/><text x="67" y="37" text-anchor="middle" fill="#173f73">GraphRAG</text></g>
+    <g transform="translate(366 286)"><rect width="128" height="60" rx="16" fill="#f1bd4a"/><text x="64" y="37" text-anchor="middle" fill="#13233a">CoE 检索</text></g>
+    <g transform="translate(698 268)"><rect width="152" height="60" rx="16" fill="#fff"/><text x="76" y="37" text-anchor="middle" fill="#173f73">报告生成</text></g>
+  </g>
+  <g font-family="Arial, sans-serif" fill="#dcecff" font-size="17">
+    <text x="266" y="190">实体消歧</text>
+    <text x="222" y="452">实体对齐</text>
+    <text x="535" y="196">证据链跟踪</text>
+    <text x="516" y="470">多级缓存</text>
+  </g>
+  <rect x="70" y="502" width="820" height="46" rx="18" fill="#071a31" fill-opacity=".55"/>
+  <text x="480" y="532" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="18" font-weight="700">Plan → Execute → Search → Report</text>
+</svg>

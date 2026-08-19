@@ -1,0 +1,141 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "@/components/ProjectCard.astro";
+import { siteConfig } from "@/config";
+import Layout from "@/layouts/Layout.astro";
+import { withBase } from "@/lib/paths";
+import { sortProjects } from "@/lib/projects";
+
+const projects = sortProjects(
+  (await getCollection("projects", ({ data }) => !data.draft && data.featured)).slice(),
+).slice(0, siteConfig.home.maxFeaturedProjects);
+---
+
+<Layout>
+  <div class="page-shell home-page">
+    <section class="profile-card" aria-labelledby="profile-name">
+      <div class="profile-heading">
+        <img
+          class="profile-avatar"
+          src={withBase(siteConfig.profile.avatar)}
+          alt={siteConfig.profile.avatarAlt}
+          width="160"
+          height="160"
+        />
+        <div>
+          <h1 id="profile-name">{siteConfig.profile.name}</h1>
+          <p class="profile-headline">{siteConfig.profile.headline}</p>
+          <p class="profile-intro">{siteConfig.profile.intro}</p>
+          <div class="profile-socials" aria-label="个人链接">
+            <a href={siteConfig.links.github} target="_blank" rel="noreferrer" aria-label="GitHub">GitHub</a>
+            <a href={siteConfig.links.blog} target="_blank" rel="noreferrer" aria-label="技术博客">Blog</a>
+            <a href={`mailto:${siteConfig.links.email}`} aria-label="发送邮件">Email</a>
+          </div>
+        </div>
+      </div>
+
+      <dl class="profile-facts">
+        {siteConfig.profile.facts.map((fact) => (
+          <div>
+            <dt>{fact.value}</dt>
+            <dd>{fact.label}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <div class="profile-actions">
+        <a class="resume-action" href={withBase(siteConfig.links.resume)} target="_blank" rel="noreferrer">
+          下载公开简历 <span aria-hidden="true">↓</span>
+        </a>
+        <a class="square-action" href={siteConfig.links.github} target="_blank" rel="noreferrer" aria-label="查看 GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.57 9.57 0 0 1 12 7c.85 0 1.7.11 2.5.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86v2.58c0 .27.18.59.69.49A10 10 0 0 0 12 2Z"/></svg>
+        </a>
+        <a class="square-action" href={siteConfig.links.blog} target="_blank" rel="noreferrer" aria-label="打开技术博客">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm2 4v2h10V8H7Zm0 4v2h10v-2H7Zm0 4v2h6v-2H7Z"/></svg>
+        </a>
+        <a class="square-action" href={`mailto:${siteConfig.links.email}`} aria-label="发送邮件">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm0 3.2V17h18V8.2l-9 5.4-9-5.4ZM4.2 7 12 11.68 19.8 7H4.2Z"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <section class="portfolio-tabs" data-tabs>
+      <div class="tab-list" role="tablist" aria-label="首页内容">
+        <button type="button" role="tab" aria-selected="true" aria-controls="projects-panel" id="projects-tab">
+          {siteConfig.home.projectsTab}
+        </button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="about-panel" id="about-tab">
+          {siteConfig.home.aboutTab}
+        </button>
+      </div>
+
+      <div class="tab-panel" id="projects-panel" role="tabpanel" aria-labelledby="projects-tab">
+        <div class="content-heading">
+          <h2>{siteConfig.home.projectsTitle}</h2>
+          <p>{siteConfig.home.projectsDescription}</p>
+        </div>
+        <div class="project-grid">
+          {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+        </div>
+        <a class="all-projects-link" href={withBase("/projects/")}>{siteConfig.home.allProjectsLabel}</a>
+      </div>
+
+      <div class="tab-panel" id="about-panel" role="tabpanel" aria-labelledby="about-tab">
+        <div class="about-copy">
+          <h2>{siteConfig.about.title}</h2>
+          {siteConfig.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <div class="about-section">
+          <h3>技术能力</h3>
+          <div class="skill-groups">
+            {siteConfig.about.skillGroups.map((group) => (
+              <article>
+                <h4>{group.title}</h4>
+                <div class="tag-list">{group.items.map((item) => <span>{item}</span>)}</div>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div class="about-section">
+          <h3>教育背景</h3>
+          <div class="education-list">
+            {siteConfig.about.education.map((item) => (
+              <article>
+                <div><h4>{item.school}</h4><p>{item.detail}</p></div>
+                <time>{item.period}</time>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.querySelectorAll<HTMLElement>("[data-tabs]").forEach((tabs) => {
+      tabs.dataset.ready = "true";
+      const buttons = [...tabs.querySelectorAll<HTMLButtonElement>("[role='tab']")];
+      const panels = [...tabs.querySelectorAll<HTMLElement>("[role='tabpanel']")];
+
+      function activate(button: HTMLButtonElement) {
+        buttons.forEach((item) => item.setAttribute("aria-selected", String(item === button)));
+        panels.forEach((panel) => { panel.hidden = panel.id !== button.getAttribute("aria-controls"); });
+        history.replaceState(null, "", button.id === "about-tab" ? "#about" : location.pathname);
+      }
+
+      buttons.forEach((button, index) => {
+        button.addEventListener("click", () => activate(button));
+        button.addEventListener("keydown", (event) => {
+          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+          event.preventDefault();
+          const offset = event.key === "ArrowRight" ? 1 : -1;
+          const next = buttons[(index + offset + buttons.length) % buttons.length];
+          next.focus();
+          activate(next);
+        });
+      });
+
+      activate(location.hash === "#about" ? buttons[1] : buttons[0]);
+    });
+  </script>
+</Layout>

@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { withBase } from "@/lib/paths";
+import { getProjectSlug } from "@/lib/projects";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  index?: number;
+}
+
+const { project, index } = Astro.props;
+const { title, summary, period, tags, metrics, cover, coverAlt } = project.data;
+const slug = getProjectSlug(project);
+---
+
+<article class="project-card">
+  <a class="project-cover-link" href={withBase(`/projects/${slug}/`)} aria-label={`查看 ${title} 项目详情`}>
+    {cover ? (
+      <img class="project-cover" src={withBase(cover)} alt={coverAlt || `${title} 项目封面`} width="960" height="600" loading="lazy" />
+    ) : (
+      <span class="project-cover-fallback" aria-hidden="true">{title.slice(0, 2).toUpperCase()}</span>
+    )}
+  </a>
+  <div class="project-card-body">
+    <div class="project-card-meta">
+      {typeof index === "number" && <span>{String(index + 1).padStart(2, "0")}</span>}
+      {period && <time>{period}</time>}
+    </div>
+    <h3><a href={withBase(`/projects/${slug}/`)}>{title}</a></h3>
+    <div class="tag-list" aria-label="项目技术标签">
+      {tags.map((tag) => <span>{tag}</span>)}
+    </div>
+    <p>{summary}</p>
+    {metrics.length > 0 && (
+      <p class="project-result"><strong>{metrics[0].value}</strong> {metrics[0].label}</p>
+    )}
+  </div>
+</article>

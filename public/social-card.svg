@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0d2748"/>
+      <stop offset="1" stop-color="#2869b0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1030" cy="100" r="250" fill="#f1bd4a" opacity=".16"/>
+  <circle cx="130" cy="640" r="320" fill="#9cc8f5" opacity=".12"/>
+  <text x="100" y="170" fill="#9cc8f5" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="700" letter-spacing="4">2027 届硕士 · 大模型算法</text>
+  <text x="100" y="310" fill="#fff" font-family="Arial, Microsoft YaHei, sans-serif" font-size="96" font-weight="800">李增圣</text>
+  <text x="100" y="405" fill="#f1bd4a" font-family="Arial, Microsoft YaHei, sans-serif" font-size="42" font-weight="700">大模型后训练 · Agent · Agentic RL</text>
+  <text x="100" y="510" fill="#dcecff" font-family="Arial, Microsoft YaHei, sans-serif" font-size="26">Medical-Qwen / KG-Deepsearch / 多 Agent 推理</text>
+</svg>

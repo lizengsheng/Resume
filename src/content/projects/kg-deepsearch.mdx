@@ -1,0 +1,67 @@
+---
+slug: kg-deepsearch
+title: "KG-Deepsearch"
+summary: "以 GraphRAG 构建医疗知识图谱，使用 SFT + GRPO 优化实体抽取，并通过 CoE 多跳检索、证据链跟踪与 LangGraph 多 Agent 编排生成报告。"
+period: "2025.09 - 2025.11"
+tags:
+  - GraphRAG
+  - LangGraph
+  - Qwen3-4B
+  - SFT + GRPO
+  - CoE
+  - Multi-Agent
+metrics:
+  - value: "87.6%"
+    label: "关系抽取 F1"
+  - value: "1s"
+    label: "平均实体抽取时延"
+  - value: "81%"
+    label: "报告证据追溯率"
+cover: "/project-covers/kg-deepsearch.svg"
+featured: true
+---
+
+## 项目问题
+
+多格式、超长医疗文档带来实体冲突、重复节点与抽取成本问题；复杂问诊还需要跨多跳关系检索并保留证据链。项目将图谱构建、专用抽取模型、CoE 检索与多 Agent 报告生成整合为一条链路。
+
+## 系统链路
+
+<div class="pipeline">
+  <div>多格式文档<br />分块处理</div>
+  <div>GraphRAG<br />图谱构建</div>
+  <div>CoE<br />逐跳检索</div>
+  <div>Multi-Agent<br />报告生成</div>
+</div>
+
+## 图谱构建优化
+
+- **实体消歧：**使用字符串召回与向量重排识别未登录实体，确定文本实体在图谱中的真实节点。
+- **实体对齐：**在候选组内计算交并，再由 LLM 判别图谱中的重复节点。
+- 重复节点由 **15%** 降至 **4%**，关系冲突由 **8%** 降至 **2%**。
+
+## 实体抽取优化
+
+使用 SFT 稳定输出结构，并用 GRPO 优化抽取质量，训练 Qwen3-4B 专用实体抽取模型替代通用大模型。在 1K 评测集上：
+
+- 关系 F1 由 **80.2%** 提升至 **87.6%**，实体 F1 由 **86.1%** 提升至 **89.4%**。
+- 结构合法率由 **93.8%** 提升至 **96.5%**，真实性由 **89.4%** 提升至 **92.5%**。
+- 平均抽取时延由 **3.2s** 降至 **1s**。
+
+## DeepSearch 集成 CoE
+
+将多跳推理问题分解为子查询，使用 CoE 进行逐跳图检索；动态宽度控制探索广度，证据链跟踪记录决策、关联查询与上下文，多级缓存处理相似查询和重复探索。
+
+在 1K 多跳问题评测上，使用 CoE 后：标答重叠度 F1 由 **64%** 提升至 **72%**，推理深度由 **58%** 提升至 **80%**，关系利用率由 **46%** 提升至 **63%**。
+
+## 多 Agent 协同
+
+使用 Plan-Execute-Report 混合编排工作流，根据查询生成任务计划，调用 GraphRAG 检索和 DeepSearch 搜索工具，最终生成长文档报告。
+
+<div class="result-callout">
+  相比 GraphAgent，标答重叠度 F1 由 <strong>57%</strong> 提升至 <strong>65%</strong>，关系利用率由 <strong>44%</strong> 提升至 <strong>58%</strong>，文档连贯性由 <strong>85%</strong> 提升至 <strong>92%</strong>。相比 DeepSearchAgent，F1 由 <strong>74%</strong> 提升至 <strong>77%</strong>，证据追溯率由 <strong>56%</strong> 提升至 <strong>81%</strong>，文档连贯性由 <strong>84%</strong> 提升至 <strong>92%</strong>。
+</div>
+
+## 技术栈
+
+GraphRAG、Qwen3-4B、SFT、GRPO、CoE、LangGraph、向量重排、证据链跟踪、多级缓存、Plan-Execute-Report。

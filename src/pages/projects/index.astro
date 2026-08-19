@@ -1,0 +1,22 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "@/components/ProjectCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import { withBase } from "@/lib/paths";
+import { sortProjects } from "@/lib/projects";
+
+const projects = sortProjects((await getCollection("projects", ({ data }) => !data.draft)).slice());
+---
+
+<Layout title="全部项目" description="项目实践与技术记录。">
+  <div class="page-shell projects-page">
+    <a class="back-link" href={withBase("/")}><span aria-hidden="true">←</span> 返回首页</a>
+    <div class="content-heading page-title">
+      <h1>全部项目</h1>
+      <p>页面自动读取项目 Markdown/MDX；新增文件后会自动出现在这里。</p>
+    </div>
+    <div class="project-grid">
+      {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+    </div>
+  </div>
+</Layout>

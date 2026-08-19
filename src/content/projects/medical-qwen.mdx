@@ -1,0 +1,61 @@
+---
+slug: medical-qwen
+title: "Medical-Qwen"
+summary: "面向临床诊断场景，对 Qwen3-8B-Base 进行 SFT、DPO、PPO 与 GRPO 后训练，并以医疗问诊分类路由组织普通与急症双链路。"
+period: "2025.12 - 2026.01"
+tags:
+  - Qwen3-8B
+  - SFT
+  - DPO
+  - PPO
+  - GRPO
+  - 医疗路由
+metrics:
+  - value: "84.2%"
+    label: "PPO 链路医学资格成绩"
+  - value: "83%"
+    label: "病例特征利用率"
+  - value: "2%"
+    label: "急症高危未提示率"
+cover: "/project-covers/medical-qwen.svg"
+featured: true
+---
+
+## 项目问题
+
+通用医疗数据微调会造成医学资格成绩下降；仅依赖 SFT 或 DPO 又难以同时满足普通问诊的结构完整、推理充分，以及急症问诊的风险提示和建议措施要求。项目围绕这两个目标构建数据、训练和路由闭环。
+
+## 数据与训练路径
+
+<div class="pipeline">
+  <div>相似度召回<br />20K 高相关样本</div>
+  <div>SFT<br />恢复医学能力</div>
+  <div>DPO<br />结构偏好对齐</div>
+  <div>分类路由<br />普通 / 急症</div>
+</div>
+
+将 CEval 医疗测试集与 200 万条原始数据进行相似度匹配，召回 20K 高相关样本用于 SFT。医学资格成绩由 Base 模型的 **72.7%** 提升至 **81.3%**。随后构造 2K 强负例偏好对进行 DPO，结构覆盖率由 **75%** 提升至 **82%**，医学资格成绩达到 **83.5%**。
+
+## 医疗问诊分类路由
+
+构造 5K 数据训练医疗问诊分类模型，将请求划分为普通问诊与急症问诊。普通问诊侧重结构与推理，急症问诊侧重风险提示与建议措施；高危或不确定样本的急症召回率达到 **89%**。
+
+## 普通问诊：PPO 质量链路
+
+以 10K 普通问诊偏好数据进行 PPO 训练并由奖励模型打分：
+
+- 结构覆盖率达到 **84%**，医学资格成绩达到 **84.2%**。
+- 病例特征利用率由 DPO 的 **68%** 提升至 **83%**。
+- 推理错误率由 **17%** 降至 **7%**。
+
+## 急症问诊：Construct-SFT + GRPO 安全链路
+
+构造 20K 急症数据，通过 SFT 固定输出结构；随后让 GRPO 对每条 prompt 生成 K 个结构化急症回答，并用规则奖励进行评价。
+
+<div class="result-callout">
+  无建议措施由 DPO 的 <strong>8%</strong> 降至 <strong>3%</strong>，高危未提示由 <strong>7%</strong> 降至 <strong>2%</strong>。
+</div>
+
+## 技术栈
+
+Qwen3-8B-Base、SFT、DPO、PPO、GRPO、向量召回、偏好数据构造、规则奖励、分类路由。

@@ -1,0 +1,61 @@
+---
+import Navbar from "@/components/Navbar.astro";
+import Footer from "@/components/Footer.astro";
+import { siteConfig } from "@/config";
+import { withBase } from "@/lib/paths";
+import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = siteConfig.site.title,
+  description = siteConfig.site.description,
+  image = withBase(siteConfig.site.socialImage),
+} = Astro.props;
+
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
+const socialImage = Astro.site ? new URL(image, Astro.site) : image;
+const pageTitle = title.includes(siteConfig.profile.name) ? title : `${title}｜${siteConfig.profile.name}`;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#173f73" />
+    <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
+    <link rel="canonical" href={canonical} />
+    <title>{pageTitle}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem("theme");
+        const dark = saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+    <Navbar />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
