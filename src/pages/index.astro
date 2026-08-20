@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import ContactLinks from "@/components/ContactLinks.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import { siteConfig } from "@/config";
 import Layout from "@/layouts/Layout.astro";
@@ -12,10 +13,6 @@ const allProjects = sortProjects(
 const projects = allProjects
   .filter((project) => project.data.featured)
   .slice(0, siteConfig.home.maxFeaturedProjects);
-const profileFacts = siteConfig.profile.facts.map((fact) => ({
-  value: "source" in fact && fact.source === "projectCount" ? String(allProjects.length) : fact.value,
-  label: fact.label,
-}));
 ---
 
 <Layout>
@@ -36,15 +33,6 @@ const profileFacts = siteConfig.profile.facts.map((fact) => ({
         </div>
       </div>
 
-      <dl class="profile-facts">
-        {profileFacts.map((fact) => (
-          <div>
-            <dt>{fact.value}</dt>
-            <dd>{fact.label}</dd>
-          </div>
-        ))}
-      </dl>
-
       <div class="profile-actions">
         <a class="button-primary" href={withBase(siteConfig.links.resume)} target="_blank" rel="noreferrer">
           <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -54,29 +42,7 @@ const profileFacts = siteConfig.profile.facts.map((fact) => ({
         </a>
       </div>
 
-      <div class="profile-links" aria-label="个人链接">
-        <span>{siteConfig.home.contactLabel}：</span>
-        <a href={siteConfig.links.github} target="_blank" rel="noreferrer">
-          <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="16" rx="2" />
-            <path d="m9 9-3 3 3 3m6-6 3 3-3 3m-2-8-2 10" />
-          </svg>
-          GitHub
-        </a>
-        <a href={siteConfig.links.blog} target="_blank" rel="noreferrer">
-          <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Zm16 0A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z" />
-          </svg>
-          技术博客
-        </a>
-        <a href={`mailto:${siteConfig.links.email}`}>
-          <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3" y="5" width="18" height="14" rx="2" />
-            <path d="m4 7 8 6 8-6" />
-          </svg>
-          Email
-        </a>
-      </div>
+      <ContactLinks showLabel className="profile-links" />
     </section>
 
     <section class="portfolio-tabs" data-tabs>
@@ -90,25 +56,17 @@ const profileFacts = siteConfig.profile.facts.map((fact) => ({
       </div>
 
       <section class="tab-panel" id="projects" role="tabpanel" aria-labelledby="projects-tab">
-        <div class="content-heading">
-          <h2>{siteConfig.home.projectsTitle}</h2>
-          <p>{siteConfig.home.projectsDescription}</p>
-        </div>
         {projects.length > 0 ? (
           <div class="project-grid">
             {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
           </div>
         ) : (
-          <p class="empty-state">暂时还没有公开的精选项目。</p>
+          <p class="empty-state">暂时还没有公开项目。</p>
         )}
         <a class="all-projects-link" href={withBase("/projects/")}>{siteConfig.home.allProjectsLabel} <span aria-hidden="true">→</span></a>
       </section>
 
       <section class="tab-panel" id="about" role="tabpanel" aria-labelledby="about-tab">
-        <div class="about-copy">
-          <h2>{siteConfig.about.title}</h2>
-          {siteConfig.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-        </div>
         <div class="about-section">
           <h3>技术能力</h3>
           <div class="skill-groups">

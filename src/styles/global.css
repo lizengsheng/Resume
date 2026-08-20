@@ -121,7 +121,7 @@ button { margin: 0; }
 }
 
 .nav-links a:hover,
-.profile-links a:hover,
+.contact-links a:hover,
 .back-link:hover,
 .project-article a:hover { color: var(--accent); }
 
@@ -233,36 +233,18 @@ button { margin: 0; }
 }
 
 .profile-intro {
-  max-width: 560px;
+  max-width: none;
   margin: 0.65rem 0 0;
   color: var(--muted);
-}
-
-.profile-facts {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 2rem 0 1.5rem;
-  border-block: 1px solid var(--line);
-}
-
-.profile-facts div {
-  padding: 0.9rem 1rem;
-  text-align: center;
-}
-
-.profile-facts div + div { border-left: 1px solid var(--line); }
-.profile-facts dt { font-size: 1rem; font-weight: 750; }
-
-.profile-facts dd {
-  margin: 0.15rem 0 0;
-  color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.94rem;
+  white-space: nowrap;
 }
 
 .profile-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
+  margin-top: 1.6rem;
 }
 
 .button-primary,
@@ -305,18 +287,16 @@ button { margin: 0; }
   color: var(--accent-contrast);
 }
 
-.profile-links {
+.contact-links {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: 0.8rem;
-  margin-top: 1rem;
   font-size: 0.9rem;
 }
 
-.profile-links > span { color: var(--muted); }
+.contact-label { color: var(--muted); }
 
-.profile-links a {
+.contact-links a {
   display: inline-flex;
   align-items: center;
   gap: 0.32rem;
@@ -324,6 +304,12 @@ button { margin: 0; }
   padding-bottom: 0.08rem;
   color: var(--accent);
   font-weight: 550;
+  white-space: nowrap;
+}
+
+.profile-links {
+  flex-wrap: nowrap;
+  margin-top: 1rem;
 }
 
 .link-icon {
@@ -340,37 +326,33 @@ button { margin: 0; }
 .portfolio-tabs { padding-bottom: 1rem; }
 
 .tab-list {
-  display: flex;
-  gap: 1.5rem;
-  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-soft);
+  padding: 4px;
 }
 
 .tab-list button {
-  position: relative;
-  min-width: 4rem;
-  min-height: 48px;
+  min-height: 46px;
   border: 0;
+  border-radius: 4px;
   background: transparent;
   color: var(--muted);
   cursor: pointer;
   font-size: 0.98rem;
   font-weight: 650;
+  transition: background-color 150ms ease, color 150ms ease;
 }
 
-.tab-list button::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: -1px;
-  left: 0;
-  height: 2px;
-  background: transparent;
+.tab-list button:hover { background: var(--bg); color: var(--accent); }
+
+.tab-list button[aria-selected="true"] {
+  background: var(--accent);
+  color: var(--accent-contrast);
 }
-
-.tab-list button:hover { color: var(--accent); }
-
-.tab-list button[aria-selected="true"] { color: var(--accent); }
-.tab-list button[aria-selected="true"]::after { background: var(--accent); }
 
 .tab-panel {
   scroll-margin-top: 1rem;
@@ -380,16 +362,14 @@ button { margin: 0; }
 .content-heading { margin-bottom: 1.5rem; }
 
 .content-heading h1,
-.content-heading h2,
-.about-copy h2 {
+.content-heading h2 {
   margin: 0;
   font-size: clamp(1.75rem, 5vw, 2.15rem);
   line-height: 1.2;
   letter-spacing: -0.025em;
 }
 
-.content-heading p,
-.about-copy p {
+.content-heading p {
   margin: 0.55rem 0 0;
   color: var(--muted);
 }
@@ -492,8 +472,8 @@ button { margin: 0; }
   font-size: 0.9rem;
 }
 
-.about-copy { max-width: 680px; }
 .about-section { margin-top: 2.4rem; }
+.tab-panel > .about-section:first-child { margin-top: 0; }
 .about-section > h3 { margin: 0 0 1rem; font-size: 1.3rem; }
 
 .skill-groups {
@@ -715,6 +695,17 @@ button { margin: 0; }
   font-size: 0.8rem;
 }
 
+.footer-copy { margin: 0; }
+
+.footer-links {
+  flex-wrap: nowrap;
+}
+
+.footer-links a {
+  color: var(--muted);
+  border-bottom: 1px dashed currentColor;
+}
+
 .not-found {
   min-height: calc(100vh - 164px);
   display: grid;
@@ -747,11 +738,9 @@ button { margin: 0; }
     text-align: center;
   }
 
-  .profile-intro { max-width: 420px; }
+  .profile-intro { max-width: 420px; white-space: normal; }
   .profile-actions { justify-content: center; }
   .profile-links { justify-content: center; }
-  .tab-list { gap: 0; }
-  .tab-list button { flex: 1; }
   .tab-panel { padding-top: 2.4rem; }
   .project-grid,
   .skill-groups { grid-template-columns: 1fr; }
@@ -782,15 +771,20 @@ button { margin: 0; }
     min-height: 98px;
     flex-direction: column;
     justify-content: center;
+    gap: 0.65rem;
     text-align: center;
   }
+
+  .footer-links { justify-content: center; }
 }
 
 @media (max-width: 400px) {
   .wordmark { font-size: 0.98rem; }
-  .profile-facts div { padding-inline: 0.45rem; }
-  .profile-facts dd { font-size: 0.72rem; }
   .profile-actions > a { width: 100%; }
+}
+
+@media (max-width: 359px) {
+  .profile-links { flex-wrap: wrap; }
 }
 
 @media (prefers-reduced-motion: reduce) {

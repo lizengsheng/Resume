@@ -8,20 +8,15 @@ export const siteConfig = {
   site: {
     brand: "Li Zengsheng",
     title: "Li Zengsheng's Resume",
-    description: "Li Zengsheng 的大模型算法、Agent 与强化学习个人作品集。",
+    description: "Li Zengsheng 的大模型后训练、Agent 与 Agentic RL 个人作品集。",
     socialImage: "/social-card.svg",
   },
   profile: {
     name: "Li Zengsheng",
-    headline: "大模型算法 · Agent · 强化学习",
-    intro: "聚焦大模型后训练、检索增强与多 Agent 系统，持续记录项目实践与技术思考。",
+    headline: "大模型后训练 · Agent · Agentic RL",
+    intro: "聚焦大模型后训练、Agent 与 Agentic RL，持续记录项目实践与技术思考。",
     avatar: "/profile.jpg",
     avatarAlt: "Li Zengsheng 个人照片",
-    facts: [
-      { value: "2027", label: "硕士毕业" },
-      { value: "", label: "公开项目", source: "projectCount" },
-      { value: "Agent", label: "关注方向" },
-    ],
   },
   links: {
     email: "1910853272@qq.com",
@@ -34,17 +29,10 @@ export const siteConfig = {
     contactLabel: "联系我",
     projectsTab: "项目",
     aboutTab: "关于",
-    projectsTitle: "精选项目",
-    projectsDescription: "这里展示当前最具代表性的项目。增删项目只需维护项目 Markdown 文件。",
     allProjectsLabel: "查看全部项目",
     maxFeaturedProjects: 4,
   },
   about: {
-    title: "关于我",
-    paragraphs: [
-      "2027 届电子信息硕士，人工智能本科背景，关注大模型后训练、强化学习、知识检索与 Agent 系统。",
-      "这个网站用于集中展示我的项目、技术积累和公开简历；项目内容会随着实践持续更新。",
-    ],
     skillGroups: [
       {
         title: "模型训练",
@@ -71,8 +59,5 @@ export const siteConfig = {
         period: "2019.09 - 2023.07",
       },
     ],
-  },
-  footer: {
-    text: "用 Astro 构建 · 持续更新中",
   },
 } as const;
