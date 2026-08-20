@@ -18,7 +18,9 @@
   const button = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
 
   function syncThemeButton() {
-    button?.setAttribute("aria-pressed", String(document.documentElement.classList.contains("dark")));
+    const dark = document.documentElement.classList.contains("dark");
+    button?.setAttribute("aria-pressed", String(dark));
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#212737" : "#fdfdfd");
   }
 
   button?.addEventListener("click", () => {

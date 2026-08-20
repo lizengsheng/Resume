@@ -6,7 +6,7 @@
  */
 export const siteConfig = {
   site: {
-    brand: "Portfolio",
+    brand: "Li Zengsheng · Portfolio",
     title: "Li Zengsheng 的个人作品集",
     description: "Li Zengsheng 的大模型算法、Agent 与强化学习个人作品集。",
     socialImage: "/social-card.svg",
@@ -30,8 +30,9 @@ export const siteConfig = {
     resume: "/resume.pdf",
   },
   home: {
-    projectsTab: "作品",
-    aboutTab: "关于",
+    viewProjectsLabel: "查看精选项目",
+    resumeLabel: "下载公开简历",
+    contactLabel: "联系我",
     projectsTitle: "项目",
     projectsDescription: "这里展示当前最具代表性的项目。增删项目只需维护项目 Markdown 文件。",
     allProjectsLabel: "查看全部项目",

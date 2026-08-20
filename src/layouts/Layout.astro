@@ -29,7 +29,7 @@ const pageTitle = title.includes(siteConfig.profile.name) ? title : `${title}｜
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#173f73" />
+    <meta name="theme-color" content="#fdfdfd" />
     <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
     <link rel="canonical" href={canonical} />
     <title>{pageTitle}</title>
@@ -47,6 +47,7 @@ const pageTitle = title.includes(siteConfig.profile.name) ? title : `${title}｜
         const saved = localStorage.getItem("theme");
         const dark = saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
         document.documentElement.classList.toggle("dark", dark);
+        document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#212737" : "#fdfdfd");
       })();
     </script>
   </head>

@@ -1,6 +1,6 @@
 # Li Zengsheng's Resume
 
-基于 `simple-portfolio` 视觉骨架改造的中文求职作品集。首页采用资料卡、三项事实、快捷操作和“作品 / 关于”标签页；项目内容由 Markdown/MDX 自动生成，并提供隐私安全的公开简历 PDF。
+基于 `simple-portfolio` 组件基础改造、并以个人[技术博客](https://lizengsheng.github.io/Blog/)为视觉基准的中文求职作品集。首页采用连续可滚动的资料、精选项目与关于章节；项目内容由 Markdown/MDX 自动生成，并提供公开简历 PDF 下载。
 
 在线地址：<https://lizengsheng.github.io/Resume/>。首页顶部导航、首屏和联系区均提供[技术博客](https://lizengsheng.github.io/Blog/)入口。
 
@@ -94,4 +94,4 @@ Astro 已配置：
 
 ## 许可与来源
 
-本项目基于 [vito8916/simple-portfolio](https://github.com/vito8916/simple-portfolio) 改造，保留原项目的 MIT `LICENSE`。首页延续参考站的窄版个人资料、黄色强调色、项目网格和标签页结构，并针对中文内容、可维护性与 GitHub Pages 子路径部署做了调整。
+本项目基于 [vito8916/simple-portfolio](https://github.com/vito8916/simple-portfolio) 改造，保留原项目的 MIT `LICENSE`。当前视觉以 [Li Zengsheng 的技术博客](https://lizengsheng.github.io/Blog/)为基准，统一使用窄栏排版、系统中文字体、细分隔线及同源明暗配色；功能仍是招聘作品集，不包含文章、搜索、标签或归档系统。
