@@ -1,7 +1,7 @@
 # 架构地图
 
 - `src/config.ts`：姓名、描述、头像路径、统计、链接、关于内容与页面文字的集中配置入口。
-- `src/pages/`：博客同源视觉的连续作品集首页、全部项目页、中文 404 和项目静态详情路由。
+- `src/pages/`：博客同源视觉的渐进增强标签页首页、全部项目页、中文 404 和项目静态详情路由。
 - `src/components/`：导航、通用项目卡、主题切换与公共页脚。
 - `src/content/projects/`：可自由增删的项目 Markdown/MDX；文件名可自动作为 slug。
 - `src/content/projects/_project-template.md.example`：不会参与构建的项目复制模板。

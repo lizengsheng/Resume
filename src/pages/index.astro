@@ -46,64 +46,136 @@ const profileFacts = siteConfig.profile.facts.map((fact) => ({
       </dl>
 
       <div class="profile-actions">
-        <a class="button-primary" href={withBase("/#projects")}>
-          {siteConfig.home.viewProjectsLabel} <span aria-hidden="true">→</span>
-        </a>
-        <a class="button-secondary" href={withBase(siteConfig.links.resume)} target="_blank" rel="noreferrer">
-          {siteConfig.home.resumeLabel} <span aria-hidden="true">↓</span>
+        <a class="button-primary" href={withBase(siteConfig.links.resume)} target="_blank" rel="noreferrer">
+          <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" />
+          </svg>
+          {siteConfig.home.resumeLabel}
         </a>
       </div>
 
       <div class="profile-links" aria-label="个人链接">
         <span>{siteConfig.home.contactLabel}：</span>
-        <a href={siteConfig.links.github} target="_blank" rel="noreferrer">GitHub</a>
-        <a href={siteConfig.links.blog} target="_blank" rel="noreferrer">技术博客</a>
-        <a href={`mailto:${siteConfig.links.email}`}>Email</a>
+        <a href={siteConfig.links.github} target="_blank" rel="noreferrer">
+          <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="m9 9-3 3 3 3m6-6 3 3-3 3m-2-8-2 10" />
+          </svg>
+          GitHub
+        </a>
+        <a href={siteConfig.links.blog} target="_blank" rel="noreferrer">
+          <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v17H6.5A2.5 2.5 0 0 0 4 22V5.5Zm16 0A2.5 2.5 0 0 0 17.5 3H13v17h4.5A2.5 2.5 0 0 1 20 22V5.5Z" />
+          </svg>
+          技术博客
+        </a>
+        <a href={`mailto:${siteConfig.links.email}`}>
+          <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="m4 7 8 6 8-6" />
+          </svg>
+          Email
+        </a>
       </div>
     </section>
 
-    <section class="home-section" id="projects" aria-labelledby="projects-title">
-      <div class="content-heading">
-        <h2 id="projects-title">{siteConfig.home.projectsTitle}</h2>
-        <p>{siteConfig.home.projectsDescription}</p>
+    <section class="portfolio-tabs" data-tabs>
+      <div class="tab-list" role="tablist" aria-label="首页内容">
+        <button type="button" role="tab" aria-selected="true" aria-controls="projects" id="projects-tab">
+          {siteConfig.home.projectsTab}
+        </button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="about" id="about-tab" tabindex="-1">
+          {siteConfig.home.aboutTab}
+        </button>
       </div>
-      {projects.length > 0 ? (
-        <div class="project-grid">
-          {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
-        </div>
-      ) : (
-        <p class="empty-state">暂时还没有公开的精选项目。</p>
-      )}
-      <a class="all-projects-link" href={withBase("/projects/")}>{siteConfig.home.allProjectsLabel} <span aria-hidden="true">→</span></a>
-    </section>
 
-    <section class="home-section" id="about" aria-labelledby="about-title">
-      <div class="about-copy">
-        <h2 id="about-title">{siteConfig.about.title}</h2>
-        {siteConfig.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-      </div>
-      <div class="about-section">
-        <h3>技术能力</h3>
-        <div class="skill-groups">
-          {siteConfig.about.skillGroups.map((group) => (
-            <article>
-              <h4>{group.title}</h4>
-              <div class="tag-list">{group.items.map((item) => <span>{item}</span>)}</div>
-            </article>
-          ))}
+      <section class="tab-panel" id="projects" role="tabpanel" aria-labelledby="projects-tab">
+        <div class="content-heading">
+          <h2>{siteConfig.home.projectsTitle}</h2>
+          <p>{siteConfig.home.projectsDescription}</p>
         </div>
-      </div>
-      <div class="about-section">
-        <h3>教育背景</h3>
-        <div class="education-list">
-          {siteConfig.about.education.map((item) => (
-            <article>
-              <div><h4>{item.school}</h4><p>{item.detail}</p></div>
-              <time>{item.period}</time>
-            </article>
-          ))}
+        {projects.length > 0 ? (
+          <div class="project-grid">
+            {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+          </div>
+        ) : (
+          <p class="empty-state">暂时还没有公开的精选项目。</p>
+        )}
+        <a class="all-projects-link" href={withBase("/projects/")}>{siteConfig.home.allProjectsLabel} <span aria-hidden="true">→</span></a>
+      </section>
+
+      <section class="tab-panel" id="about" role="tabpanel" aria-labelledby="about-tab">
+        <div class="about-copy">
+          <h2>{siteConfig.about.title}</h2>
+          {siteConfig.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
         </div>
-      </div>
+        <div class="about-section">
+          <h3>技术能力</h3>
+          <div class="skill-groups">
+            {siteConfig.about.skillGroups.map((group) => (
+              <article>
+                <h4>{group.title}</h4>
+                <div class="tag-list">{group.items.map((item) => <span>{item}</span>)}</div>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div class="about-section">
+          <h3>教育背景</h3>
+          <div class="education-list">
+            {siteConfig.about.education.map((item) => (
+              <article>
+                <div><h4>{item.school}</h4><p>{item.detail}</p></div>
+                <time>{item.period}</time>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </section>
   </div>
+
+  <script>
+    document.querySelectorAll<HTMLElement>("[data-tabs]").forEach((tabs) => {
+      const buttons = [...tabs.querySelectorAll<HTMLButtonElement>("[role='tab']")];
+      const panels = [...tabs.querySelectorAll<HTMLElement>("[role='tabpanel']")];
+      if (buttons.length === 0 || panels.length === 0) return;
+
+      function activate(button: HTMLButtonElement, updateHash = true) {
+        const panelId = button.getAttribute("aria-controls");
+        buttons.forEach((item) => {
+          const selected = item === button;
+          item.setAttribute("aria-selected", String(selected));
+          item.tabIndex = selected ? 0 : -1;
+        });
+        panels.forEach((panel) => { panel.hidden = panel.id !== panelId; });
+        if (updateHash && panelId) history.replaceState(null, "", `#${panelId}`);
+      }
+
+      buttons.forEach((button, index) => {
+        button.addEventListener("click", () => activate(button));
+        button.addEventListener("keydown", (event) => {
+          let nextIndex: number | undefined;
+          if (event.key === "ArrowLeft") nextIndex = (index - 1 + buttons.length) % buttons.length;
+          if (event.key === "ArrowRight") nextIndex = (index + 1) % buttons.length;
+          if (event.key === "Home") nextIndex = 0;
+          if (event.key === "End") nextIndex = buttons.length - 1;
+          if (nextIndex === undefined) return;
+          event.preventDefault();
+          const next = buttons[nextIndex];
+          next.focus();
+          activate(next);
+        });
+      });
+
+      window.addEventListener("hashchange", () => {
+        const target = buttons.find((button) => button.getAttribute("aria-controls") === location.hash.slice(1));
+        if (target) activate(target, false);
+      });
+
+      tabs.dataset.ready = "true";
+      const initial = buttons.find((button) => button.getAttribute("aria-controls") === location.hash.slice(1)) ?? buttons[0];
+      activate(initial, false);
+    });
+  </script>
 </Layout>

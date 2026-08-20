@@ -1,6 +1,6 @@
 # Li Zengsheng's Resume
 
-基于 `simple-portfolio` 组件基础改造、并以个人[技术博客](https://lizengsheng.github.io/Blog/)为视觉基准的中文求职作品集。首页采用连续可滚动的资料、精选项目与关于章节；项目内容由 Markdown/MDX 自动生成，并提供公开简历 PDF 下载。
+基于 `simple-portfolio` 组件基础改造、并以个人[技术博客](https://lizengsheng.github.io/Blog/)为视觉基准的中文求职作品集。首页采用紧凑资料区和“项目 / 关于”标签页；项目内容由 Markdown/MDX 自动生成，并提供公开简历 PDF 下载。
 
 在线地址：<https://lizengsheng.github.io/Resume/>。首页顶部导航、首屏和联系区均提供[技术博客](https://lizengsheng.github.io/Blog/)入口。
 

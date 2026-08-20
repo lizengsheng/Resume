@@ -44,7 +44,7 @@ body {
   color: var(--text);
   font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.56;
   text-rendering: optimizeLegibility;
   transition: background-color 160ms ease, color 160ms ease;
 }
@@ -97,7 +97,7 @@ button { margin: 0; }
 .wordmark {
   display: inline-flex;
   align-items: center;
-  font-size: 1.42rem;
+  font-size: 1.35rem;
   font-weight: 650;
   line-height: 1.15;
   white-space: nowrap;
@@ -221,7 +221,7 @@ button { margin: 0; }
 
 .profile-heading h1 {
   margin: 0;
-  font-size: clamp(2.2rem, 6vw, 3rem);
+  font-size: clamp(2rem, 6vw, 3rem);
   line-height: 1.08;
   letter-spacing: -0.04em;
 }
@@ -266,7 +266,6 @@ button { margin: 0; }
 }
 
 .button-primary,
-.button-secondary,
 .all-projects-link,
 .external-project-link,
 .button {
@@ -288,7 +287,6 @@ button { margin: 0; }
   color: var(--accent-contrast);
 }
 
-.button-secondary,
 .all-projects-link,
 .external-project-link {
   background: transparent;
@@ -301,7 +299,6 @@ button { margin: 0; }
   background: var(--accent-hover);
 }
 
-.button-secondary:hover,
 .all-projects-link:hover,
 .external-project-link:hover {
   background: var(--accent);
@@ -320,20 +317,66 @@ button { margin: 0; }
 .profile-links > span { color: var(--muted); }
 
 .profile-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  border-bottom: 1px dashed currentColor;
+  padding-bottom: 0.08rem;
   color: var(--accent);
   font-weight: 550;
-  text-decoration: underline;
-  text-decoration-style: dashed;
-  text-underline-offset: 4px;
 }
 
-.home-section {
-  scroll-margin-top: 1rem;
-  padding: 3rem 0;
+.link-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.portfolio-tabs { padding-bottom: 1rem; }
+
+.tab-list {
+  display: flex;
+  gap: 1.5rem;
   border-bottom: 1px solid var(--line);
 }
 
-.home-section:last-child { border-bottom: 0; }
+.tab-list button {
+  position: relative;
+  min-width: 4rem;
+  min-height: 48px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.98rem;
+  font-weight: 650;
+}
+
+.tab-list button::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: transparent;
+}
+
+.tab-list button:hover { color: var(--accent); }
+
+.tab-list button[aria-selected="true"] { color: var(--accent); }
+.tab-list button[aria-selected="true"]::after { background: var(--accent); }
+
+.tab-panel {
+  scroll-margin-top: 1rem;
+  padding: 2.75rem 0 2rem;
+}
+
 .content-heading { margin-bottom: 1.5rem; }
 
 .content-heading h1,
@@ -695,7 +738,7 @@ button { margin: 0; }
   .nav-links { display: none; }
   .mobile-menu { display: block; }
   .nav-actions { margin-left: auto; }
-  .wordmark { font-size: 1.12rem; }
+  .wordmark { font-size: 1.05rem; }
   .profile-card { padding-top: 2.5rem; }
 
   .profile-heading {
@@ -707,7 +750,9 @@ button { margin: 0; }
   .profile-intro { max-width: 420px; }
   .profile-actions { justify-content: center; }
   .profile-links { justify-content: center; }
-  .home-section { padding: 2.5rem 0; }
+  .tab-list { gap: 0; }
+  .tab-list button { flex: 1; }
+  .tab-panel { padding-top: 2.4rem; }
   .project-grid,
   .skill-groups { grid-template-columns: 1fr; }
 
@@ -742,7 +787,7 @@ button { margin: 0; }
 }
 
 @media (max-width: 400px) {
-  .wordmark { font-size: 1rem; }
+  .wordmark { font-size: 0.98rem; }
   .profile-facts div { padding-inline: 0.45rem; }
   .profile-facts dd { font-size: 0.72rem; }
   .profile-actions > a { width: 100%; }
